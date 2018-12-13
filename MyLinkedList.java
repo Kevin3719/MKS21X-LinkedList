@@ -1,9 +1,11 @@
 class MyLinkedList{
- private int size;
+ private int length;
  private Node start,end;
+ public MyLinkedList() {
 
+ }
  public int size() {
-   return size;
+   return length;
  }
  public boolean add(int value) {
    return true;
