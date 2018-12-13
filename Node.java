@@ -14,4 +14,12 @@ class Node{
    prev = a;
    data = b;
  }
+ public int get() {
+   return data;
+ }
+ public void set(int i) {
+   data = i;
+ }
+ 
+
 }
