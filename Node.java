@@ -20,6 +20,11 @@ class Node{
  public void set(int i) {
    data = i;
  }
- 
+ public Node next() {
+   return next;
+ }
+ public Node prev() {
+   return prev;
+ }
 
 }
