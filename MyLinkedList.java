@@ -81,9 +81,9 @@ public Integer set(int index,Integer value) {
 
   public boolean add(int index,Integer a) {
     Node indexNode = getNode(index);
-    Node current = new Node(indexNode,a);
-    if(i < length - 1) {
-      current.setNext(indeexNode.next());
+    Node current = new Node(a,indexNode);
+    if(index < length - 1) {
+      current.setNext(indexNode.next());
     }
     return true;
   }
