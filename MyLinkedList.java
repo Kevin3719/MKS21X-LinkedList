@@ -4,14 +4,18 @@ class MyLinkedList{
  public MyLinkedList() {
    length = 0;
  }
+ // sets everything back to beginning
 public void clear() {
   start = null;
   end = null;
   length = 0;
 }
+// returns length thats about it
  public int size() {
    return length;
  }
+ // 2 cases 1. if there is an empty MyLinkedList 2 if there isnt
+ // if there is
  public boolean add(int value) {
    if (length == 0) {
      Node input = new Node(value);
@@ -75,9 +79,14 @@ public Integer set(int index,Integer value) {
       return -1;
   }
 
-
-
-
+  public boolean add(int index,Integer a) {
+    Node indexNode = getNode(index);
+    Node current = new Node(indexNode,a);
+    if(i < length - 1) {
+      current.setNext(indeexNode.next());
+    }
+    return true;
+  }
 
  public String toString() {
    String output = "[";
