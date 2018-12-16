@@ -79,6 +79,28 @@ public Integer set(int index,Integer value) {
       return -1;
   }
 
+  public boolean remove(Integer value) {
+    Node indexNode = start;
+      for (int index = 0; index < length; index += 1) {
+        if (indexNode.getData() == value) {
+          if (index == 0) {
+            start = indexNode.next();
+          } else {
+            indexNode.prev().setNext(indexNode.next());
+          }
+          if (index == length - 1) {
+            end = indexNode.prev();
+          } else {
+            indexNode.next().setPrev(indexNode.prev());
+          }
+          length -= 1;
+          return true;
+        }
+        indexNode = indexNode.next();
+      }
+      return false;
+    }
+
   public boolean add(int index,Integer a) {
     if (length == 0 || index == length) {
       add(a);
@@ -97,6 +119,24 @@ public Integer set(int index,Integer value) {
   }
     return true;
   }
+
+public Integer remove(int index) {
+  Node indexNode = getNode(index);
+  if (index == 0) {
+    start = indexNode.next();
+  } else {
+    indexNode.prev().setNext(indexNode.next());
+  }
+  if (index == length - 1) {
+    end = indexNode.prev();
+  } else {
+    indexNode.next().setPrev(indexNode.prev());
+  }
+  length -= 1;
+  return indexNode.getData();
+}
+
+
 
  public String toString() {
    String output = "[";
