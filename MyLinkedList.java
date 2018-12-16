@@ -80,11 +80,21 @@ public Integer set(int index,Integer value) {
   }
 
   public boolean add(int index,Integer a) {
+    if (length == 0 || index == length) {
+      add(a);
+    } else {
     Node indexNode = getNode(index);
-    Node current = new Node(a,indexNode);
-    if(index < length - 1) {
-      current.setNext(indexNode.next());
+    Node current = new Node(a);
+    if (index == 0) {
+      start = current;
+    } else {
+      current.setPrev(indexNode.prev());
+      indexNode.prev().setNext(current);
     }
+    current.setNext(indexNode);
+    indexNode.setPrev(current);
+    length += 1;
+  }
     return true;
   }
 
