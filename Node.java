@@ -15,6 +15,9 @@ class Node{
    data = b;
    next = c;
  }
+ public Node(int b) {
+   data = b;
+ }
  //node constructor with an end
  public Node(Node a,int b) {
    prev = a;
