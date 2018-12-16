@@ -29,10 +29,13 @@ public void clear() {
    length += 1;
    return true;
  }
+
+ // throws error if input is greater than length; loops through until it finds the number;
 private Node getNode(int index) {
-  if (index >= length) {
+  if (index >= length || index < 0) {
     throw new IndexOutOfBoundsException("index is out of range (index < 0 || index >= size())");
   }
+  // couldve done it with a for loop not sure why i didn't
   int b = 0;
   Node current = start;
   while(b < index) {
@@ -42,6 +45,7 @@ private Node getNode(int index) {
   return current;
 }
 
+// reused code
 public Integer get(int index) {
   return getNode(index).getData();
 }
@@ -55,6 +59,7 @@ public Integer set(int index,Integer value) {
   return output;
 }
 
+// rused code;
   public boolean contains(Integer value) {
   /*  Node current = start;
     for (int i = 0; i < length; i += 1) {
@@ -68,6 +73,7 @@ public Integer set(int index,Integer value) {
     return indexOf(value) > -1;
   }
 
+// loops until it finds the right number
   public int indexOf(Integer value) {
     Node current = start;
       for (int i = 0; i < length; i += 1) {
@@ -79,40 +85,24 @@ public Integer set(int index,Integer value) {
       return -1;
   }
 
-  public boolean remove(Integer value) {
-    Node indexNode = start;
-      for (int index = 0; index < length; index += 1) {
-        if (indexNode.getData() == value) {
-          if (index == 0) {
-            start = indexNode.next();
-          } else {
-            indexNode.prev().setNext(indexNode.next());
-          }
-          if (index == length - 1) {
-            end = indexNode.prev();
-          } else {
-            indexNode.next().setPrev(indexNode.prev());
-          }
-          length -= 1;
-          return true;
-        }
-        indexNode = indexNode.next();
-      }
-      return false;
-    }
 
+// a lot of different get and sets;
   public boolean add(int index,Integer a) {
-    if (length == 0 || index == length) {
+    // if there isnt any elements or it is the last one, just use add;
+    if (index == length) {
       add(a);
     } else {
     Node indexNode = getNode(index);
     Node current = new Node(a);
+    //if it is the first element, need to redirect start
     if (index == 0) {
       start = current;
     } else {
+      // current adopts the old prev. current becomes the prevois of indexNode
       current.setPrev(indexNode.prev());
       indexNode.prev().setNext(current);
     }
+    // current's next is indexNode;
     current.setNext(indexNode);
     indexNode.setPrev(current);
     length += 1;
@@ -120,16 +110,21 @@ public Integer set(int index,Integer value) {
     return true;
   }
 
+// removes is more redirects. maybe shouldve used more variables
 public Integer remove(int index) {
   Node indexNode = getNode(index);
   if (index == 0) {
+    // needs to redirect start if it is the first element
     start = indexNode.next();
   } else {
+    // otherwise the previous element needs to skip over the index value
     indexNode.prev().setNext(indexNode.next());
   }
   if (index == length - 1) {
+    // if it is the last one then needs to redirect end
     end = indexNode.prev();
   } else {
+    // otherwise the next element needs to adopt the previous of the currrent;
     indexNode.next().setPrev(indexNode.prev());
   }
   length -= 1;
@@ -137,8 +132,11 @@ public Integer remove(int index) {
 }
 
 
-
+// creates a string in array format
  public String toString() {
+   if (length == 0) {
+     return "";
+   }
    String output = "[";
    Node current = start;
    for (int i = 0; i < length - 1; i += 1) {
@@ -148,4 +146,27 @@ public Integer remove(int index) {
    output += current + "]";
    return output;
  }
+
+// combine of indexOf and remove; literally copied and pasted parts of both code;
+ public boolean remove(Integer value) {
+   Node indexNode = start;
+     for (int index = 0; index < length; index += 1) {
+       if (indexNode.getData() == value) {
+         if (index == 0) {
+           start = indexNode.next();
+         } else {
+           indexNode.prev().setNext(indexNode.next());
+         }
+         if (index == length - 1) {
+           end = indexNode.prev();
+         } else {
+           indexNode.next().setPrev(indexNode.prev());
+         }
+         length -= 1;
+         return true;
+       }
+       indexNode = indexNode.next();
+     }
+     return false;
+   }
 }
