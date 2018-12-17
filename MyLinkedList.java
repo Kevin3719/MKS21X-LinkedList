@@ -87,7 +87,7 @@ public Integer set(int index,Integer value) {
 
 
 // a lot of different get and sets;
-  public boolean add(int index,Integer a) {
+  public void add(int index,Integer a) {
     // if there isnt any elements or it is the last one, just use add;
     if (index == length) {
       add(a);
@@ -107,7 +107,6 @@ public Integer set(int index,Integer value) {
     indexNode.setPrev(current);
     length += 1;
   }
-    return true;
   }
 
 // removes is more redirects. maybe shouldve used more variables
