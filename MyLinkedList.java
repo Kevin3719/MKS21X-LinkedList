@@ -134,7 +134,7 @@ public Integer remove(int index) {
 // creates a string in array format
  public String toString() {
    if (length == 0) {
-     return "";
+     return "[]";
    }
    String output = "[";
    Node current = start;
@@ -168,4 +168,22 @@ public Integer remove(int index) {
      }
      return false;
    }
+
+
+//   Connecting two linked lists should be able to happen in constant time!
+//New Method:
+   public void extend(MyLinkedList other){
+     if (length == 0) {
+       start = other.start;
+     } else {
+     end.setNext(other.start);
+     other.start.setPrev(end);}
+     end = other.end;
+     length += other.length;
+     other.length = 0;
+
+        //in O(1) runtime, move the elements from other onto the end of this
+        //The size of other is reduced to 0
+        //The size of this is now the combined sizes of both original lists
+    }
 }
